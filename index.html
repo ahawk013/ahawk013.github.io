@@ -1,1 +1,891 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Sysadmin Lab Portfolio | ahawk013</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Source+Serif+4:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070b0f;
+  --surface: #0c1117;
+  --surface2: #141a22;
+  --border: #1e2a38;
+  --border2: #2a3a4a;
+  --accent: #00c8f0;
+  --accent2: #00e87a;
+  --accent3: #ff5c38;
+  --accent4: #f0b800;
+  --text: #dde6f0;
+  --text-muted: #7a8fa0;
+  --text-dim: #4a5f70;
+  --red: #e84040;
+  --green: #30b850;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(rgba(0,200,240,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,240,0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(7,11,15,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 56px;
+}
+.logo { font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; color: var(--accent); }
+.logo .sep, .logo .repo { color: var(--text-dim); }
+nav { display: flex; gap: 0.25rem; }
+nav a {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.72rem;
+  color: var(--text-dim); text-decoration: none;
+  padding: 0.3rem 0.6rem; border: 1px solid transparent; transition: all 0.2s;
+}
+nav a:hover { color: var(--accent); border-color: rgba(0,200,240,0.2); background: rgba(0,200,240,0.05); }
+.live-badge { font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; color: var(--accent2); display: flex; align-items: center; gap: 0.4rem; }
+.pulse { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+/* HERO */
+.hero {
+  max-width: 1100px; margin: 0 auto; padding: 5rem 2rem 3rem;
+  position: relative; z-index: 1;
+}
+.hero-eyebrow {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.72rem;
+  color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent); }
+h1 {
+  font-family: 'Rajdhani', sans-serif; font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem;
+}
+h1 .hl { color: var(--accent); }
+h1 .dim { color: var(--text-muted); font-weight: 400; }
+.hero-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 580px; margin-bottom: 2.5rem; }
+.hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.stat { display: flex; flex-direction: column; gap: 0.2rem; }
+.stat-n { font-family: 'Rajdhani', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+.stat-l { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* CLEARANCE */
+.clearance {
+  max-width: 1100px; margin: 0 auto 3rem; padding: 0 2rem; position: relative; z-index: 1;
+}
+.clearance-inner {
+  border: 1px solid rgba(0,200,240,0.2); border-left: 3px solid var(--accent);
+  background: rgba(0,200,240,0.04); padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.cl-tag {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  color: var(--accent); background: rgba(0,200,240,0.08);
+  border: 1px solid rgba(0,200,240,0.25); padding: 0.2rem 0.5rem;
+  white-space: nowrap; letter-spacing: 0.08em;
+}
+.cl-text { font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; color: var(--text-muted); }
+.cl-text strong { color: var(--accent2); }
+
+/* SECTIONS */
+.section { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; position: relative; z-index: 1; }
+.section-hdr {
+  display: flex; align-items: center; gap: 1rem;
+  border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2.5rem;
+}
+.section-n {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.68rem;
+  color: var(--accent); background: rgba(0,200,240,0.07);
+  border: 1px solid rgba(0,200,240,0.18); padding: 0.18rem 0.45rem;
+}
+h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 600; }
+h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--accent); margin: 1.5rem 0 0.75rem; }
+h4 { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text-muted); margin: 1rem 0 0.5rem; letter-spacing: 0.05em; }
+p { margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.95rem; }
+
+/* CHAPTER CARDS */
+.ch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 1.5rem; }
+.ch-card {
+  background: var(--surface); border: 1px solid var(--border);
+  position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.2s;
+}
+.ch-card:hover { border-color: rgba(0,200,240,0.35); transform: translateY(-2px); }
+.ch-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0; transition: opacity 0.3s;
+}
+.ch-card:hover::before { opacity: 1; }
+.ch-hdr {
+  padding: 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.ch-meta { display: flex; flex-direction: column; gap: 0.3rem; }
+.ch-num { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.1em; }
+.ch-title { font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; font-weight: 600; }
+.ch-sub { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--text-dim); }
+.badge-done {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  background: rgba(48,184,80,0.1); border: 1px solid rgba(48,184,80,0.3);
+  color: var(--green); padding: 0.18rem 0.45rem; white-space: nowrap;
+}
+.ch-body { padding: 1.5rem; }
+.ch-desc { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; }
+.obj-list { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+.obj { display: flex; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); align-items: flex-start; }
+.obj-ck { color: var(--accent2); font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; flex-shrink: 0; margin-top: 0.15rem; }
+.ch-foot {
+  padding: 0.9rem 1.5rem; background: rgba(0,0,0,0.2);
+  border-top: 1px solid var(--border); display: flex; gap: 0.4rem; flex-wrap: wrap;
+}
+.tag {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  color: var(--accent); background: rgba(0,200,240,0.05);
+  border: 1px solid rgba(0,200,240,0.12); padding: 0.12rem 0.35rem;
+}
+
+/* DETAIL SECTIONS */
+.detail-card {
+  background: var(--surface); border: 1px solid var(--border); margin-bottom: 1.5rem;
+}
+.detail-hdr {
+  padding: 1rem 1.5rem; background: var(--surface2); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.detail-hdr .ch-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  color: var(--accent); background: rgba(0,200,240,0.08);
+  border: 1px solid rgba(0,200,240,0.2); padding: 0.15rem 0.4rem;
+}
+.detail-hdr .detail-title { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 600; }
+.detail-body { padding: 1.5rem; }
+
+/* CODE BLOCKS */
+.code-block {
+  background: #050810; border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); margin: 0.75rem 0; overflow-x: auto;
+}
+.code-label {
+  padding: 0.4rem 1rem; background: var(--surface2); border-bottom: 1px solid var(--border);
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-dim);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.code-label::before { content: '>'; color: var(--accent); }
+pre {
+  padding: 1rem; font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; color: var(--accent2); line-height: 1.7;
+  white-space: pre-wrap; word-break: break-all;
+}
+
+/* INFO ROWS */
+.info-row {
+  display: grid; grid-template-columns: 200px 1fr;
+  border: 1px solid var(--border); margin-bottom: 0.5rem;
+}
+.info-key {
+  background: rgba(0,200,240,0.06); border-right: 1px solid var(--border);
+  padding: 0.5rem 0.75rem; font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem; color: var(--accent); display: flex; align-items: center;
+}
+.info-val {
+  padding: 0.5rem 0.75rem; font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem; color: var(--text);
+}
+
+/* TABLES */
+.data-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.82rem; }
+.data-table th {
+  background: var(--surface2); border: 1px solid var(--border2);
+  padding: 0.6rem 0.8rem; text-align: left;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.68rem;
+  color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase;
+}
+.data-table td {
+  border: 1px solid var(--border); padding: 0.55rem 0.8rem;
+  color: var(--text-muted); vertical-align: top;
+}
+.data-table tr:nth-child(even) td { background: rgba(0,200,240,0.02); }
+.data-table .mono { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--accent2); }
+.data-table .good { color: var(--green); font-weight: bold; }
+.data-table .bad { color: var(--red); }
+.data-table .warn { color: var(--accent4); }
+.data-table .crit { color: var(--red); font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; }
+
+/* ALERT BOXES */
+.alert { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; margin: 1rem 0; border-radius: 2px; }
+.alert-warn { background: rgba(240,184,0,0.06); border: 1px solid rgba(240,184,0,0.2); border-left: 3px solid var(--accent4); }
+.alert-info { background: rgba(0,200,240,0.05); border: 1px solid rgba(0,200,240,0.15); border-left: 3px solid var(--accent); }
+.alert-good { background: rgba(0,232,122,0.05); border: 1px solid rgba(0,232,122,0.15); border-left: 3px solid var(--accent2); }
+.alert-icon { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; flex-shrink: 0; margin-top: 0.1rem; }
+.alert-warn .alert-icon { color: var(--accent4); }
+.alert-info .alert-icon { color: var(--accent); }
+.alert-good .alert-icon { color: var(--accent2); }
+.alert-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+.alert-text strong { color: var(--text); }
+
+/* STIG ITEMS */
+.stig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.stig-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 2px solid var(--red); padding: 1.1rem;
+}
+.stig-id { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--red); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+.stig-title { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+.stig-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.9rem; }
+.skill { background: var(--surface); border: 1px solid var(--border); padding: 1.1rem; }
+.skill-name { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+.skill-bar { height: 3px; background: var(--border2); margin-bottom: 0.4rem; }
+.skill-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.skill-level { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--text-dim); }
+
+/* TROUBLE */
+.trouble { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent3); padding: 1.1rem 1.3rem; margin-bottom: 0.9rem; }
+.trouble-p { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--accent3); margin-bottom: 0.5rem; }
+.trouble-s { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+.trouble-s strong { color: var(--accent2); }
+
+/* EVENT IDS */
+.event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.9rem; }
+.event-item { background: var(--surface); border: 1px solid var(--border); padding: 1rem; display: flex; gap: 0.9rem; align-items: flex-start; }
+.event-id { font-family: 'Share Tech Mono', monospace; font-size: 1rem; font-weight: bold; color: var(--red); flex-shrink: 0; min-width: 45px; }
+.event-info { display: flex; flex-direction: column; gap: 0.2rem; }
+.event-name { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600; }
+.event-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+
+/* DAILY SUMMARY */
+.summary-box {
+  background: #050810; border: 1px solid var(--border2);
+  border-left: 3px solid var(--accent2); padding: 1.5rem;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.82rem;
+  line-height: 2;
+}
+.summary-title { color: var(--accent); margin-bottom: 0.5rem; }
+.summary-row { display: flex; justify-content: space-between; color: var(--text-muted); }
+.summary-val { color: var(--accent2); }
+.summary-val.clean { color: var(--green); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); padding: 2rem;
+  text-align: center; position: relative; z-index: 1;
+}
+.footer-text { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--text-dim); }
+.footer-text a { color: var(--accent); text-decoration: none; }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+@media (max-width: 768px) {
+  .ch-grid { grid-template-columns: 1fr; }
+  nav { display: none; }
+  h1 { font-size: 2.5rem; }
+  .info-row { grid-template-columns: 1fr; }
+  .info-key { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>ahawk013</span><span class="sep">/</span><span class="repo">gov-sysadmin-lab</span></div>
+  <nav>
+    <a href="#chapters">Chapters</a>
+    <a href="#detail">Deep Dive</a>
+    <a href="#skills">Skills</a>
+    <a href="#stigs">STIGs</a>
+    <a href="#trouble">Troubleshooting</a>
+  </nav>
+  <div class="live-badge"><div class="pulse"></div>LAB ACTIVE</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Government IT Portfolio — Active Documentation</div>
+  <h1>Windows Server<br><span class="hl">Lab Journal</span><br><span class="dim">Sysadmin Training</span></h1>
+  <p class="hero-desc">Hands-on Active Directory, Group Policy, DNS/DHCP, PowerShell automation, and security monitoring — built in a government-style virtualized environment on the path to federal systems administration.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">7</div><div class="stat-l">Chapters Complete</div></div>
+    <div class="stat"><div class="stat-n">S</div><div class="stat-l">Clearance Level</div></div>
+    <div class="stat"><div class="stat-n">10+</div><div class="stat-l">STIG Controls Applied</div></div>
+    <div class="stat"><div class="stat-n">WS22</div><div class="stat-l">Platform</div></div>
+    <div class="stat"><div class="stat-n">10</div><div class="stat-l">Domain Users Managed</div></div>
+  </div>
+</section>
+
+<!-- CLEARANCE -->
+<div class="clearance">
+  <div class="clearance-inner">
+    <div class="cl-tag">SECRET // CLEARED</div>
+    <div class="cl-text">Active DoD Secret clearance holder transitioning to government systems administration. <strong>Building hands-on lab experience with enterprise Windows Server infrastructure aligned to NIST 800-53 and DISA STIG requirements.</strong></div>
+  </div>
+</div>
+
+<!-- CHAPTERS OVERVIEW -->
+<section class="section" id="chapters">
+  <div class="section-hdr"><div class="section-n">01</div><h2>Lab Chapters</h2></div>
+  <div class="ch-grid">
+
+    <div class="ch-card">
+      <div class="ch-hdr">
+        <div class="ch-meta">
+          <div class="ch-num">CHAPTER 01 // May 2026</div>
+          <div class="ch-title">Building the Foundation</div>
+          <div class="ch-sub">Domain Controller Setup & AD Forest Creation</div>
+        </div>
+        <div class="badge-done">COMPLETE</div>
+      </div>
+      <div class="ch-body">
+        <p class="ch-desc">Deployed Windows Server 2022 in UTM on Apple Silicon, resolved ARM64 architecture challenges, configured static IP, promoted the server to a Domain Controller, and created the local.lab Active Directory forest using PowerShell.</p>
+        <div class="obj-list">
+          <div class="obj"><span class="obj-ck">✓</span>Resolved ARM64 vs x86_64 architecture compatibility in UTM</div>
+          <div class="obj"><span class="obj-ck">✓</span>Set static IP 192.168.64.10 on DC01 Ethernet adapter</div>
+          <div class="obj"><span class="obj-ck">✓</span>Renamed server to DC01 following naming conventions</div>
+          <div class="obj"><span class="obj-ck">✓</span>Installed AD DS role with Install-WindowsFeature</div>
+          <div class="obj"><span class="obj-ck">✓</span>Promoted DC01 to Domain Controller with Install-ADDSForest</div>
+          <div class="obj"><span class="obj-ck">✓</span>Created local.lab AD forest with integrated DNS</div>
+          <div class="obj"><span class="obj-ck">✓</span>Verified PDCEmulator: DC01.local.lab via Get-ADDomain</div>
+        </div>
+      </div>
+      <div class="ch-foot">
+        <span class="tag">PowerShell</span><span class="tag">Active Directory</span><span class="tag">DNS</span><span class="tag">Windows Server 2022</span><span class="tag">UTM</span>
+      </div>
+    </div>
+
+    <div class="ch-card">
+      <div class="ch-hdr">
+        <div class="ch-meta">
+          <div class="ch-num">CHAPTER 02 // May 2026</div>
+          <div class="ch-title">Domain Join & AD Administration</div>
+          <div class="ch-sub">Client Config, OU Structure & User Management</div>
+        </div>
+        <div class="badge-done">COMPLETE</div>
+      </div>
+      <div class="ch-body">
+        <p class="ch-desc">Joined Windows 11 ARM to the domain after diagnosing and resolving a persistent IPv6 DNS hijacking issue. Built a government-style OU hierarchy and created domain users and security groups with role-based access control.</p>
+        <div class="obj-list">
+          <div class="obj"><span class="obj-ck">✓</span>Diagnosed IPv6 DNS conflict — UTM virtual router overriding DC01</div>
+          <div class="obj"><span class="obj-ck">✓</span>Fixed with registry DisabledComponents = 0xFF</div>
+          <div class="obj"><span class="obj-ck">✓</span>Joined Windows 11 to local.lab domain</div>
+          <div class="obj"><span class="obj-ck">✓</span>Created GOV-LAB OU hierarchy (Users/Computers/Admins/Service-Accounts)</div>
+          <div class="obj"><span class="obj-ck">✓</span>Created jsmith and jdoe.admin domain accounts</div>
+          <div class="obj"><span class="obj-ck">✓</span>Created GOV-Users and GOV-Admins security groups</div>
+          <div class="obj"><span class="obj-ck">✓</span>Verified domain login — whoami showed LOCAL\GOV-Users</div>
+        </div>
+      </div>
+      <div class="ch-foot">
+        <span class="tag">Active Directory</span><span class="tag">DNS Troubleshooting</span><span class="tag">OU Design</span><span class="tag">RBAC</span><span class="tag">IPv6</span>
+      </div>
+    </div>
+
+    <div class="ch-card">
+      <div class="ch-hdr">
+        <div class="ch-meta">
+          <div class="ch-num">CHAPTER 03 // May 2026</div>
+          <div class="ch-title">Group Policy & Security Baseline</div>
+          <div class="ch-sub">GPO Configuration & NIST/STIG Compliance</div>
+        </div>
+        <div class="badge-done">COMPLETE</div>
+      </div>
+      <div class="ch-body">
+        <p class="ch-desc">Created and deployed the GOV-Security-Baseline GPO implementing NIST 800-53 and DISA STIG controls. Configured password policy, account lockout, USB blocking, screen lock, audit logging, and deployed the mandatory DoD legal warning banner.</p>
+        <div class="obj-list">
+          <div class="obj"><span class="obj-ck">✓</span>Created GOV-Security-Baseline GPO linked to GOV-LAB OU</div>
+          <div class="obj"><span class="obj-ck">✓</span>Password policy: 12 char min, complexity, 90 day max age, 24 history</div>
+          <div class="obj"><span class="obj-ck">✓</span>Account lockout: 5 attempts, 30 min duration</div>
+          <div class="obj"><span class="obj-ck">✓</span>Disabled USB/removable storage — STIG V-220726</div>
+          <div class="obj"><span class="obj-ck">✓</span>15-minute screen lock timeout — STIG V-220719</div>
+          <div class="obj"><span class="obj-ck">✓</span>Deployed AUTHORIZED USE ONLY legal banner — DoD requirement</div>
+          <div class="obj"><span class="obj-ck">✓</span>Verified banner displays on Windows 11 login screen</div>
+        </div>
+      </div>
+      <div class="ch-foot">
+        <span class="tag">Group Policy</span><span class="tag">STIG</span><span class="tag">NIST 800-53</span><span class="tag">Security Baseline</span><span class="tag">Compliance</span>
+      </div>
+    </div>
+
+    <div class="ch-card">
+      <div class="ch-hdr">
+        <div class="ch-meta">
+          <div class="ch-num">CHAPTER 04 // May 2026</div>
+          <div class="ch-title">File Shares & NTFS Permissions</div>
+          <div class="ch-sub">SMB Shares, ACLs & Least Privilege</div>
+        </div>
+        <div class="badge-done">COMPLETE</div>
+      </div>
+      <div class="ch-body">
+        <p class="ch-desc">Built a government-style shared folder structure, applied security group-based NTFS permissions, mapped network drives, and verified access control — proving standard users are correctly denied access to restricted administrative shares.</p>
+        <div class="obj-list">
+          <div class="obj"><span class="obj-ck">✓</span>Created GOV-General, GOV-Admin, GOV-HR shares on DC01</div>
+          <div class="obj"><span class="obj-ck">✓</span>GOV-Users granted Modify on GOV-General via NTFS ACL</div>
+          <div class="obj"><span class="obj-ck">✓</span>GOV-Admins granted FullControl on GOV-Admin</div>
+          <div class="obj"><span class="obj-ck">✓</span>Mapped G: drive from Windows 11 (\\DC01\GOV-General)</div>
+          <div class="obj"><span class="obj-ck">✓</span>Verified: jsmith can access GOV-General</div>
+          <div class="obj"><span class="obj-ck">✓</span>Verified: jsmith blocked from GOV-Admin — Principle of Least Privilege</div>
+        </div>
+      </div>
+      <div class="ch-foot">
+        <span class="tag">SMB Shares</span><span class="tag">NTFS Permissions</span><span class="tag">ACL</span><span class="tag">Least Privilege</span><span class="tag">NIST AC-6</span>
+      </div>
+    </div>
+
+    <div class="ch-card">
+      <div class="ch-hdr">
+        <div class="ch-meta">
+          <div class="ch-num">CHAPTER 05 // May 2026</div>
+          <div class="ch-title">DNS & DHCP Administration</div>
+          <div class="ch-sub">Zone Management, Custom Records & Scope Config</div>
+        </div>
+        <div class="badge-done">COMPLETE</div>
+      </div>
+      <div class="ch-body">
+        <p class="ch-desc">Managed DNS zones and created custom A records and CNAME aliases. Installed and authorized DHCP server in Active Directory, configured a DHCP scope with exclusion ranges, and created MAC-based reservations for critical systems.</p>
+        <div class="obj-list">
+          <div class="obj"><span class="obj-ck">✓</span>Created A records: intranet (192.168.64.20), fileserver (192.168.64.30)</div>
+          <div class="obj"><span class="obj-ck">✓</span>Created CNAME alias: portal → intranet.local.lab</div>
+          <div class="obj"><span class="obj-ck">✓</span>Verified DNS resolution from Windows 11 client</div>
+          <div class="obj"><span class="obj-ck">✓</span>Installed DHCP role and authorized in Active Directory</div>
+          <div class="obj"><span class="obj-ck">✓</span>Created GOV-LAB scope: 192.168.64.100-200 /24</div>
+          <div class="obj"><span class="obj-ck">✓</span>Configured exclusion range protecting .1-.99</div>
+          <div class="obj"><span class="obj-ck">✓</span>Created DHCP reservation for Windows 11 by MAC address</div>
+        </div>
+      </div>
+      <div class="ch-foot">
+        <span class="tag">DNS</span><span class="tag">DHCP</span><span class="tag">A Records</span><span class="tag">CNAME</span><span class="tag">Scope Management</span>
+      </div>
+    </div>
+
+    <div class="ch-card">
+      <div class="ch-hdr">
+        <div class="ch-meta">
+          <div class="ch-num">CHAPTER 06 // May 2026</div>
+          <div class="ch-title">PowerShell Automation</div>
+          <div class="ch-sub">Bulk User Management & Scheduled Reporting</div>
+        </div>
+        <div class="badge-done">COMPLETE</div>
+      </div>
+      <div class="ch-body">
+        <p class="ch-desc">Automated bulk user creation from CSV data using PowerShell pipelines. Performed account management operations, generated AD audit reports, exported data to CSV, and scheduled an automated daily security report using Windows Task Scheduler.</p>
+        <div class="obj-list">
+          <div class="obj"><span class="obj-ck">✓</span>Created CSV employee onboarding file with 5 new hires</div>
+          <div class="obj"><span class="obj-ck">✓</span>Bulk imported 5 AD users in one pipeline command</div>
+          <div class="obj"><span class="obj-ck">✓</span>Applied standard naming convention (first initial + last name)</div>
+          <div class="obj"><span class="obj-ck">✓</span>Disabled account, reset password, forced change at next logon</div>
+          <div class="obj"><span class="obj-ck">✓</span>Generated disabled accounts, department, and group reports</div>
+          <div class="obj"><span class="obj-ck">✓</span>Scheduled Daily AD User Report task — runs at 6AM automatically</div>
+        </div>
+      </div>
+      <div class="ch-foot">
+        <span class="tag">PowerShell</span><span class="tag">Automation</span><span class="tag">CSV Import</span><span class="tag">Task Scheduler</span><span class="tag">AD Reporting</span>
+      </div>
+    </div>
+
+    <div class="ch-card">
+      <div class="ch-hdr">
+        <div class="ch-meta">
+          <div class="ch-num">CHAPTER 07 // May 2026</div>
+          <div class="ch-title">Event Logs & Security Monitoring</div>
+          <div class="ch-sub">Audit Policy, Event Analysis & Daily Reporting</div>
+        </div>
+        <div class="badge-done">COMPLETE</div>
+      </div>
+      <div class="ch-body">
+        <p class="ch-desc">Queried Windows Security event logs to analyze login activity, account changes, and identify audit policy gaps. Enabled four critical audit subcategories and built an automated daily security summary report covering key domain health metrics.</p>
+        <div class="obj-list">
+          <div class="obj"><span class="obj-ck">✓</span>Queried Security log — analyzed Event IDs 4624, 4625, 4634, 4672, 4720</div>
+          <div class="obj"><span class="obj-ck">✓</span>Identified and analyzed 2 failed login events (4625) — confirmed benign</div>
+          <div class="obj"><span class="obj-ck">✓</span>Enabled File Share, Removable Storage, Process Creation auditing</div>
+          <div class="obj"><span class="obj-ck">✓</span>Enabled Directory Service Changes auditing</div>
+          <div class="obj"><span class="obj-ck">✓</span>Exported Security log to CSV for analysis</div>
+          <div class="obj"><span class="obj-ck">✓</span>Built Daily Security Summary — 10 users, 0 lockouts, 0 failed logins</div>
+        </div>
+      </div>
+      <div class="ch-foot">
+        <span class="tag">Event Logs</span><span class="tag">Audit Policy</span><span class="tag">Security Monitoring</span><span class="tag">NIST AU-2</span><span class="tag">Incident Response</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DEEP DIVE -->
+<section class="section" id="detail">
+  <div class="section-hdr"><div class="section-n">02</div><h2>Technical Deep Dive</h2></div>
+
+  <!-- CH1 DETAIL -->
+  <div class="detail-card">
+    <div class="detail-hdr"><span class="ch-label">CH-01</span><span class="detail-title">Domain Controller Promotion</span></div>
+    <div class="detail-body">
+      <p>The server was promoted to a Domain Controller using PowerShell, creating a new Active Directory forest. All DNS integration was handled automatically as part of the promotion process.</p>
+      <div class="code-block">
+        <div class="code-label">Install AD DS Role</div>
+        <pre>Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Promote to Domain Controller & Create Forest</div>
+        <pre>Install-ADDSForest `
+  -DomainName "lab.local" `
+  -DomainNetbiosName "LAB" `
+  -InstallDns:$true `
+  -Force:$true</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Verify Domain Controller Status</div>
+        <pre>Get-ADDomain</pre>
+      </div>
+      <h4>VERIFICATION RESULTS</h4>
+      <div class="info-row"><div class="info-key">DNSRoot</div><div class="info-val">local.lab</div></div>
+      <div class="info-row"><div class="info-key">PDCEmulator</div><div class="info-val">DC01.local.lab</div></div>
+      <div class="info-row"><div class="info-key">DomainMode</div><div class="info-val">Windows2016Domain</div></div>
+      <div class="info-row"><div class="info-key">InfrastructureMaster</div><div class="info-val">DC01.local.lab</div></div>
+    </div>
+  </div>
+
+  <!-- CH2 DETAIL -->
+  <div class="detail-card">
+    <div class="detail-hdr"><span class="ch-label">CH-02</span><span class="detail-title">OU Structure & User Management</span></div>
+    <div class="detail-body">
+      <p>A government-style Organizational Unit hierarchy was created mirroring real agency network design. Access is always assigned to groups, never individual users.</p>
+      <div class="code-block">
+        <div class="code-label">Create OU Hierarchy</div>
+        <pre>New-ADOrganizationalUnit -Name "GOV-LAB" -Path "DC=local,DC=lab"
+New-ADOrganizationalUnit -Name "Users" -Path "OU=GOV-LAB,DC=local,DC=lab"
+New-ADOrganizationalUnit -Name "Computers" -Path "OU=GOV-LAB,DC=local,DC=lab"
+New-ADOrganizationalUnit -Name "Admins" -Path "OU=GOV-LAB,DC=local,DC=lab"
+New-ADOrganizationalUnit -Name "Service-Accounts" -Path "OU=GOV-LAB,DC=local,DC=lab"</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Create Domain User Account</div>
+        <pre>New-ADUser -Name "John Smith" -SamAccountName "jsmith" `
+  -UserPrincipalName "jsmith@local.lab" `
+  -Path "OU=Users,OU=GOV-LAB,DC=local,DC=lab" `
+  -AccountPassword (ConvertTo-SecureString "P@ssword123!" -AsPlainText -Force) `
+  -Enabled $true</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Fix IPv6 DNS Hijacking (Troubleshooting)</div>
+        <pre>reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v DisabledComponents /t REG_DWORD /d 0xFF /f</pre>
+      </div>
+      <div class="alert alert-warn">
+        <div class="alert-icon">!</div>
+        <div class="alert-text"><strong>Lesson Learned:</strong> UTM's virtual router was advertising its IPv6 address as DNS server via DHCPv6, overriding the IPv4 DNS setting. Always check nslookup to see the actual DNS server being used — not just what you configured. Disabling IPv6 at the registry level was required to force IPv4 DNS queries to DC01.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH3 DETAIL -->
+  <div class="detail-card">
+    <div class="detail-hdr"><span class="ch-label">CH-03</span><span class="detail-title">Password Policy & GPO Security Controls</span></div>
+    <div class="detail-body">
+      <p>The GOV-Security-Baseline GPO implements controls required by NIST 800-53 and DISA STIGs on all government systems.</p>
+      <div class="code-block">
+        <div class="code-label">NIST/STIG Compliant Password Policy</div>
+        <pre>Set-ADDefaultDomainPasswordPolicy -Identity "local.lab" `
+  -MinPasswordLength 12 `
+  -PasswordHistoryCount 24 `
+  -MaxPasswordAge "90.00:00:00" `
+  -MinPasswordAge "1.00:00:00" `
+  -LockoutThreshold 5 `
+  -LockoutDuration "00:30:00" `
+  -LockoutObservationWindow "00:30:00" `
+  -ComplexityEnabled $true</pre>
+      </div>
+      <h4>PASSWORD POLICY COMPLIANCE TABLE</h4>
+      <table class="data-table">
+        <tr><th>Setting</th><th>Value</th><th>Requirement</th><th>Status</th></tr>
+        <tr><td>MinPasswordLength</td><td class="mono">12</td><td>STIG: minimum 12 chars</td><td class="good">✓ COMPLIANT</td></tr>
+        <tr><td>ComplexityEnabled</td><td class="mono">True</td><td>Upper, lower, number, symbol</td><td class="good">✓ COMPLIANT</td></tr>
+        <tr><td>MaxPasswordAge</td><td class="mono">90 days</td><td>NIST: max 90 day lifetime</td><td class="good">✓ COMPLIANT</td></tr>
+        <tr><td>PasswordHistoryCount</td><td class="mono">24</td><td>Cannot reuse last 24</td><td class="good">✓ COMPLIANT</td></tr>
+        <tr><td>LockoutThreshold</td><td class="mono">5 attempts</td><td>Lock after 5 failures</td><td class="good">✓ COMPLIANT</td></tr>
+        <tr><td>LockoutDuration</td><td class="mono">30 minutes</td><td>Limit brute force window</td><td class="good">✓ COMPLIANT</td></tr>
+        <tr><td>ReversibleEncryption</td><td class="mono">False</td><td>Passwords as hashes only</td><td class="good">✓ COMPLIANT</td></tr>
+      </table>
+      <div class="code-block">
+        <div class="code-label">Deploy AUTHORIZED USE ONLY Legal Banner via GPO</div>
+        <pre>Set-GPRegistryValue -Name "GOV-Security-Baseline" `
+  -Key "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
+  -ValueName "LegalNoticeCaption" -Type String -Value "AUTHORIZED USE ONLY"
+
+Set-GPRegistryValue -Name "GOV-Security-Baseline" `
+  -Key "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
+  -ValueName "LegalNoticeText" -Type String `
+  -Value "This system is for authorized users only. All activity is monitored and logged. Unauthorized access is prohibited and subject to criminal prosecution."</pre>
+      </div>
+      <div class="alert alert-info">
+        <div class="alert-icon">i</div>
+        <div class="alert-text"><strong>Legal Basis:</strong> The warning banner is required under DoD policy and 18 U.S.C. 2511 (Federal Wiretap Act). It establishes implied consent for monitoring and removes any expectation of privacy. Without it, reviewing user activity logs may be legally challenged. Every government computer in the US displays this banner.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH4 DETAIL -->
+  <div class="detail-card">
+    <div class="detail-hdr"><span class="ch-label">CH-04</span><span class="detail-title">NTFS Permissions & Access Control</span></div>
+    <div class="detail-body">
+      <p>NTFS permissions enforce role-based access control on shared folders. All access is granted to security groups — never individual users.</p>
+      <div class="code-block">
+        <div class="code-label">Create SMB Shares</div>
+        <pre>New-SmbShare -Name "GOV-General" -Path "C:\Shares\GOV-General" -FullAccess "Everyone"
+New-SmbShare -Name "GOV-Admin" -Path "C:\Shares\GOV-Admin" -FullAccess "Domain Admins"</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Apply NTFS Permissions via PowerShell</div>
+        <pre># Grant GOV-Users Modify access to GOV-General
+$acl = Get-Acl "C:\Shares\GOV-General"
+$rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+  "LOCAL\GOV-Users","Modify","ContainerInherit,ObjectInherit","None","Allow")
+$acl.SetAccessRule($rule)
+Set-Acl "C:\Shares\GOV-General" $acl</pre>
+      </div>
+      <h4>ACCESS CONTROL VERIFICATION</h4>
+      <table class="data-table">
+        <tr><th>Share</th><th>Account</th><th>Rights</th><th>Result</th></tr>
+        <tr><td>GOV-General</td><td class="mono">jsmith (GOV-Users)</td><td>Modify</td><td class="good">✓ ACCESS GRANTED</td></tr>
+        <tr><td>GOV-Admin</td><td class="mono">jsmith (GOV-Users)</td><td>None</td><td class="bad">✗ ACCESS DENIED</td></tr>
+        <tr><td>GOV-Admin</td><td class="mono">jdoe.admin (GOV-Admins)</td><td>FullControl</td><td class="good">✓ ACCESS GRANTED</td></tr>
+      </table>
+      <div class="alert alert-good">
+        <div class="alert-icon">✓</div>
+        <div class="alert-text"><strong>Principle of Least Privilege Verified:</strong> jsmith can perform their job function using GOV-General but is completely blocked from administrative resources. This is NIST AC-6 in action.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH5 DETAIL -->
+  <div class="detail-card">
+    <div class="detail-hdr"><span class="ch-label">CH-05</span><span class="detail-title">DNS Records & DHCP Configuration</span></div>
+    <div class="detail-body">
+      <p>Custom DNS records were created to simulate government intranet infrastructure. DHCP was installed, authorized in Active Directory, and configured with scope options and reservations.</p>
+      <div class="code-block">
+        <div class="code-label">Create Custom DNS Records</div>
+        <pre>Add-DnsServerResourceRecordA -ZoneName "local.lab" -Name "intranet" -IPv4Address "192.168.64.20"
+Add-DnsServerResourceRecordCName -ZoneName "local.lab" -Name "portal" -HostNameAlias "intranet.local.lab."
+Add-DnsServerResourceRecordA -ZoneName "local.lab" -Name "fileserver" -IPv4Address "192.168.64.30"</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Install & Authorize DHCP Server</div>
+        <pre>Install-WindowsFeature -Name DHCP -IncludeManagementTools
+Add-DhcpServerInDC -DnsName "DC01.local.lab" -IPAddress 192.168.64.10</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Create DHCP Scope with Options & Exclusions</div>
+        <pre>Add-DhcpServerv4Scope -Name "GOV-LAB Scope" -StartRange 192.168.64.100 -EndRange 192.168.64.200 -SubnetMask 255.255.255.0 -State Active
+Set-DhcpServerv4OptionValue -ScopeId 192.168.64.0 -DnsServer 192.168.64.10 -Router 192.168.64.1 -DnsDomain "local.lab"
+Add-DhcpServerv4ExclusionRange -ScopeId 192.168.64.0 -StartRange 192.168.64.1 -EndRange 192.168.64.99</pre>
+      </div>
+      <h4>DHCP SCOPE SUMMARY</h4>
+      <div class="info-row"><div class="info-key">Scope</div><div class="info-val">GOV-LAB Scope — 192.168.64.0/24</div></div>
+      <div class="info-row"><div class="info-key">Available Range</div><div class="info-val">192.168.64.100 — 192.168.64.200 (101 addresses)</div></div>
+      <div class="info-row"><div class="info-key">Excluded</div><div class="info-val">192.168.64.1 — 192.168.64.99 (static/infrastructure)</div></div>
+      <div class="info-row"><div class="info-key">DNS Server</div><div class="info-val">192.168.64.10 (DC01)</div></div>
+      <div class="info-row"><div class="info-key">Authorized in AD</div><div class="info-val">Yes — dc01.local.lab</div></div>
+    </div>
+  </div>
+
+  <!-- CH6 DETAIL -->
+  <div class="detail-card">
+    <div class="detail-hdr"><span class="ch-label">CH-06</span><span class="detail-title">PowerShell Automation Scripts</span></div>
+    <div class="detail-body">
+      <p>PowerShell automation reduces manual effort, ensures consistency, and creates auditable records of administrative actions. The bulk user import script created 5 accounts in seconds with perfect consistency.</p>
+      <div class="code-block">
+        <div class="code-label">Bulk User Import from CSV (One-liner Pipeline)</div>
+        <pre>Import-Csv "C:\Scripts\new_users.csv" | ForEach-Object {
+  $u = ($_.FirstName[0] + $_.LastName).ToLower()
+  New-ADUser -Name "$($_.FirstName) $($_.LastName)" `
+    -SamAccountName $u -UserPrincipalName "$u@local.lab" `
+    -Path "OU=Users,OU=GOV-LAB,DC=local,DC=lab" `
+    -AccountPassword (ConvertTo-SecureString "P@ssword123!" -AsPlainText -Force) `
+    -Enabled $true -Department $_.Department -Title $_.Title
+  Write-Host "Created: $u" -ForegroundColor Green
+}</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">User Account Management Operations</div>
+        <pre># Disable account (offboarding)
+Disable-ADAccount -Identity "edavis"
+
+# Reset password (must meet complexity policy)
+Set-ADAccountPassword -Identity "rjohnson" -NewPassword (ConvertTo-SecureString "G0v3rnm3nt@Lab2026!" -AsPlainText -Force) -Reset
+
+# Force password change at next logon
+Set-ADUser -Identity "rjohnson" -ChangePasswordAtLogon $true</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">AD Reporting — Export to CSV</div>
+        <pre>Get-ADUser -Filter * -Properties Department,Title,Enabled | `
+  Select-Object Name,SamAccountName,Department,Title,Enabled | `
+  Export-Csv "C:\Scripts\AD_User_Report.csv" -NoTypeInformation</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Register Scheduled Daily Report Task</div>
+        <pre>Register-ScheduledTask -TaskName "Daily AD User Report" `
+  -Action (New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-File C:\Scripts\AD_User_Report.ps1") `
+  -Trigger (New-ScheduledTaskTrigger -Daily -At "06:00AM") `
+  -RunLevel Highest -Description "Exports AD user report daily at 6AM"</pre>
+      </div>
+      <div class="alert alert-warn">
+        <div class="alert-icon">!</div>
+        <div class="alert-text"><strong>Security Policy Enforcement Observed:</strong> A password reset attempt using "NewP@ss456!" was rejected by the domain password policy — demonstrating that Chapter 3's security controls are actively protecting the environment. A stronger password (G0v3rnm3nt@Lab2026!) was required.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH7 DETAIL -->
+  <div class="detail-card">
+    <div class="detail-hdr"><span class="ch-label">CH-07</span><span class="detail-title">Security Event Analysis & Audit Policy</span></div>
+    <div class="detail-body">
+      <p>Windows Security event logs tell the complete story of system activity. Every login, failure, policy change, and account modification is recorded and queryable using PowerShell.</p>
+      <div class="code-block">
+        <div class="code-label">Query Failed Login Attempts</div>
+        <pre>Get-EventLog -LogName Security | Where-Object {$_.EventID -eq 4625} | Select-Object TimeGenerated, Message | Format-Table -AutoSize -Wrap</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Count Failed Logins by Account</div>
+        <pre>Get-EventLog -LogName Security | Where-Object {$_.EventID -eq 4625} | Group-Object {$_.ReplacementStrings[5]} | Select-Object Name, Count | Sort-Object Count -Descending</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Enable Critical Audit Policies</div>
+        <pre>auditpol /set /subcategory:"File Share" /success:enable /failure:enable
+auditpol /set /subcategory:"Removable Storage" /success:enable /failure:enable
+auditpol /set /subcategory:"Process Creation" /success:enable
+auditpol /set /subcategory:"Directory Service Changes" /success:enable /failure:enable</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label">Daily Security Summary Script</div>
+        <pre>$report = @"
+=== DAILY SECURITY SUMMARY - $(Get-Date -Format 'yyyy-MM-dd') ===
+Failed Logins (Last 24hrs): $((Get-EventLog -LogName Security | Where-Object {$_.EventID -eq 4625 -and $_.TimeGenerated -gt (Get-Date).AddDays(-1)}).Count)
+Account Lockouts (Last 24hrs): $((Get-EventLog -LogName Security | Where-Object {$_.EventID -eq 4740 -and $_.TimeGenerated -gt (Get-Date).AddDays(-1)}).Count)
+New Accounts Created (Last 24hrs): $((Get-EventLog -LogName Security | Where-Object {$_.EventID -eq 4720 -and $_.TimeGenerated -gt (Get-Date).AddDays(-1)}).Count)
+Disabled Accounts: $((Get-ADUser -Filter {Enabled -eq $false}).Count)
+Total Domain Users: $((Get-ADUser -Filter *).Count)
+"@</pre>
+      </div>
+      <h4>SAMPLE OUTPUT — 2026-05-04</h4>
+      <div class="summary-box">
+        <div class="summary-title">=== DAILY SECURITY SUMMARY - 2026-05-04 ===</div>
+        <div class="summary-row"><span>Total Domain Users:</span><span class="summary-val">10</span></div>
+        <div class="summary-row"><span>Disabled Accounts:</span><span class="summary-val">3</span></div>
+        <div class="summary-row"><span>New Accounts Created (Last 24hrs):</span><span class="summary-val">5</span></div>
+        <div class="summary-row"><span>Account Lockouts (Last 24hrs):</span><span class="summary-val clean">0 — CLEAN</span></div>
+        <div class="summary-row"><span>Failed Logins (Last 24hrs):</span><span class="summary-val clean">0 — CLEAN</span></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CRITICAL EVENT IDS -->
+<section class="section">
+  <div class="section-hdr"><div class="section-n">03</div><h2>Critical Security Event IDs</h2></div>
+  <p style="margin-bottom:1.5rem;">Every government sysadmin and SOC analyst must know these Event IDs. They are the language of Windows security monitoring.</p>
+  <div class="event-grid">
+    <div class="event-item"><div class="event-id">4624</div><div class="event-info"><div class="event-name">Successful Logon</div><div class="event-desc">Normal login. Multiple rapid 4624s at odd hours from unknown source = suspicious lateral movement.</div></div></div>
+    <div class="event-item"><div class="event-id">4625</div><div class="event-info"><div class="event-name">Failed Logon</div><div class="event-desc">Wrong password entered. Rapid failures in short period = brute force attack in progress.</div></div></div>
+    <div class="event-item"><div class="event-id">4648</div><div class="event-info"><div class="event-name">Explicit Credential Logon</div><div class="event-desc">User logged on using different credentials (runas). Could indicate lateral movement or pass-the-hash.</div></div></div>
+    <div class="event-item"><div class="event-id">4672</div><div class="event-info"><div class="event-name">Special Privileges Assigned</div><div class="event-desc">Admin-level logon. Unexpected 4672 from non-admin account = privilege escalation alert.</div></div></div>
+    <div class="event-item"><div class="event-id">4720</div><div class="event-info"><div class="event-name">User Account Created</div><div class="event-desc">New account created. Unauthorized creation during off-hours = possible backdoor account.</div></div></div>
+    <div class="event-item"><div class="event-id">4725</div><div class="event-info"><div class="event-name">User Account Disabled</div><div class="event-desc">Account disabled. Unauthorized disabling of admin accounts = active threat actor.</div></div></div>
+    <div class="event-item"><div class="event-id">4740</div><div class="event-info"><div class="event-name">Account Locked Out</div><div class="event-desc">Too many failed logins. Lockout storm across many accounts = credential stuffing or bad script.</div></div></div>
+    <div class="event-item"><div class="event-id">4756</div><div class="event-info"><div class="event-name">Member Added to Group</div><div class="event-desc">User added to security group. Unexpected addition to Domain Admins = critical immediate alert.</div></div></div>
+    <div class="event-item"><div class="event-id">4768</div><div class="event-info"><div class="event-name">Kerberos TGT Requested</div><div class="event-desc">Domain login initiated. Golden Ticket attacks appear as anomalous TGT requests.</div></div></div>
+    <div class="event-item"><div class="event-id">4776</div><div class="event-info"><div class="event-name">Credential Validation</div><div class="event-desc">NTLM authentication used. Pass-the-hash attacks use NTLM — monitor for unusual NTLM in Kerberos environment.</div></div></div>
+    <div class="event-item"><div class="event-id">4634</div><div class="event-info"><div class="event-name">Account Logoff</div><div class="event-desc">Session ended. Correlate with 4624 to determine session duration and user activity patterns.</div></div></div>
+    <div class="event-item"><div class="event-id">4722</div><div class="event-info"><div class="event-name">User Account Enabled</div><div class="event-desc">Disabled account re-enabled. Reactivating old disabled accounts = potential threat actor persistence.</div></div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-hdr"><div class="section-n">04</div><h2>Skills Developed</h2></div>
+  <div class="skills-grid">
+    <div class="skill"><div class="skill-name">Active Directory</div><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">PowerShell</div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">Group Policy</div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">Windows Server 2022</div><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">DNS Administration</div><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">DHCP Management</div><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">NTFS / SMB Permissions</div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">Security Event Analysis</div><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">STIG Compliance</div><div class="skill-bar"><div class="skill-fill" style="width:50%"></div></div><div class="skill-level">DEVELOPING</div></div>
+    <div class="skill"><div class="skill-name">Network Troubleshooting</div><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+    <div class="skill"><div class="skill-name">Audit Policy</div><div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div><div class="skill-level">DEVELOPING</div></div>
+    <div class="skill"><div class="skill-name">Virtualization (UTM)</div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div><div class="skill-level">INTERMEDIATE</div></div>
+  </div>
+</section>
+
+<!-- STIG CONTROLS -->
+<section class="section" id="stigs">
+  <div class="section-hdr"><div class="section-n">05</div><h2>STIG & NIST Controls Applied</h2></div>
+  <div class="stig-grid">
+    <div class="stig-item"><div class="stig-id">STIG V-220726 // DISA</div><div class="stig-title">Removable Storage Denied</div><div class="stig-desc">USB drives and all removable storage blocked via GPO. Prevents data exfiltration and malware introduction on classified networks.</div></div>
+    <div class="stig-item"><div class="stig-id">STIG V-220700 // DISA</div><div class="stig-title">AutoRun Disabled</div><div class="stig-desc">AutoPlay disabled for all drive types (value 255). Prevents automatic code execution from inserted media without user confirmation.</div></div>
+    <div class="stig-item"><div class="stig-id">STIG V-220719 // DISA</div><div class="stig-title">Screen Lock — 15 Minutes</div><div class="stig-desc">Screen saver timeout set to 900 seconds with password-protected lock. Prevents unauthorized access to unattended workstations.</div></div>
+    <div class="stig-item"><div class="stig-id">DOD POLICY // Legal Banner</div><div class="stig-title">AUTHORIZED USE ONLY</div><div class="stig-desc">Legal warning banner deployed via GPO. Establishes implied consent for monitoring under 18 U.S.C. 2511. Mandatory on all government systems.</div></div>
+    <div class="stig-item"><div class="stig-id">NIST AU-3 // 800-53</div><div class="stig-title">Command Line Audit Logging</div><div class="stig-desc">Process creation events include full command line arguments. Enables forensic reconstruction of attacker commands during incident response.</div></div>
+    <div class="stig-item"><div class="stig-id">NIST AC-6 // 800-53</div><div class="stig-title">Least Privilege Enforced</div><div class="stig-desc">NTFS permissions restrict file share access to authorized security groups. Standard users cannot access administrative shares.</div></div>
+    <div class="stig-item"><div class="stig-id">NIST AU-2 // 800-53</div><div class="stig-title">Audit Policy — File Share</div><div class="stig-desc">File Share auditing enabled for success and failure. All access to shared resources is now logged and auditable.</div></div>
+    <div class="stig-item"><div class="stig-id">NIST AU-2 // 800-53</div><div class="stig-title">Removable Storage Auditing</div><div class="stig-desc">Removable storage access events logged. Even if a USB is inserted, the attempt is recorded — supporting DLP investigations.</div></div>
+    <div class="stig-item"><div class="stig-id">NIST IA-5 // 800-53</div><div class="stig-title">Password Complexity Policy</div><div class="stig-desc">12-character minimum with complexity, 90-day max age, 24-password history. Meets NIST 800-63B and STIG requirements.</div></div>
+    <div class="stig-item"><div class="stig-id">NIST AC-7 // 800-53</div><div class="stig-title">Account Lockout Policy</div><div class="stig-desc">5 failed attempts triggers 30-minute lockout. Prevents automated password guessing and brute force attacks.</div></div>
+  </div>
+</section>
+
+<!-- TROUBLESHOOTING -->
+<section class="section" id="trouble">
+  <div class="section-hdr"><div class="section-n">06</div><h2>Troubleshooting Log</h2></div>
+  <div class="trouble">
+    <div class="trouble-p">ISSUE: ARM64 vs x86_64 — Windows Server ISO incompatible with Apple Silicon Mac</div>
+    <div class="trouble-s">The x64 ISO requires full CPU emulation on Apple Silicon causing severe performance degradation and installation failures with "License Terms not found" errors. <strong>Resolution:</strong> Used CrystalFetch app to download the ARM64-native Windows ISO directly from Microsoft servers. Reconfigured UTM VM to use Virtualize mode (ARM64 native) instead of Emulate mode (x86_64 emulation). Performance improved dramatically.</div>
+  </div>
+  <div class="trouble">
+    <div class="trouble-p">ISSUE: Domain join failing — "The specified domain either does not exist or could not be contacted"</div>
+    <div class="trouble-s">Systematic diagnosis: ping to DC01 by IP succeeded (network OK), but Resolve-DnsName local.lab failed. nslookup revealed the actual DNS server was a UTM IPv6 address (fe80::cc08:faff:fed8:b864) — not DC01. UTM's virtual router was advertising its own IPv6 address as DNS server via DHCPv6, overriding IPv4 settings. <strong>Resolution:</strong> Disabled IPv6 at the Windows registry level using DisabledComponents = 0xFF, forcing all DNS queries through IPv4 to DC01 (192.168.64.10).</div>
+  </div>
+  <div class="trouble">
+    <div class="trouble-p">ISSUE: Bridged network mode placed VMs on different subnets (192.168.64.x vs 10.0.0.x)</div>
+    <div class="trouble-s">Switching both VMs to Bridged networking caused Windows 11 to receive a 10.0.0.x DHCP address from the home router while DC01 retained its static 192.168.64.x address. VMs could no longer ping each other. <strong>Resolution:</strong> Reverted both VMs to UTM Shared Network mode where both operate on the same 192.168.64.x subnet. The IPv6 DNS issue was addressed at the registry level instead.</div>
+  </div>
+  <div class="trouble">
+    <div class="trouble-p">ISSUE: GPO legal banner values not populating on ARM64 Windows 11 client</div>
+    <div class="trouble-s">GPO registry string values applied correctly server-side (confirmed via Get-GPRegistryValue) but did not propagate to client registry after gpupdate /force. <strong>Resolution:</strong> Applied registry values directly via Set-ItemProperty as a workaround. Noted as an ARM64 Windows 11 GPO quirk — production x64 systems apply these correctly via GPO without manual intervention.</div>
+  </div>
+  <div class="trouble">
+    <div class="trouble-p">ISSUE: Password reset rejected — "Does not meet complexity or history requirement"</div>
+    <div class="trouble-s">Attempted to reset rjohnson's password to "NewP@ss456!" which was rejected by the domain password policy configured in Chapter 3. This was not a bug — it was the security control working correctly. <strong>Resolution:</strong> Used a stronger, unique password (G0v3rnm3nt@Lab2026!) that met all complexity requirements and was not in the 24-password history. Lesson: your own security policies will enforce themselves against you too.</div>
+  </div>
+  <div class="trouble">
+    <div class="trouble-p">ISSUE: PowerShell multiline paste executing commands in reverse order</div>
+    <div class="trouble-s">Pasting multiline PowerShell commands into the VM caused the terminal to interpret them in reverse — running the last line first, which caused "null object" errors since variables hadn't been assigned yet. <strong>Resolution:</strong> Converted all multiline scripts to single-line commands using semicolons and backtick-n for newlines, or ran each line individually. This is a known quirk of terminal paste behavior in virtualized environments.</div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-text">
+    ahawk013 &nbsp;|&nbsp; Government Sysadmin Lab Portfolio &nbsp;|&nbsp;
+    <a href="https://github.com/ahawk013/ahawk013.github.io">github.com/ahawk013</a>
+    &nbsp;|&nbsp; Built with PowerShell, patience, and too many VM restarts &nbsp;|&nbsp; 2026
+  </p>
+</footer>
+
+</body>
+</html>
