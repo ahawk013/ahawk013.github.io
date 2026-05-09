@@ -1,1 +1,1194 @@
-lp
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amar Hawkins | Government IT Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #0f2040;
+    --navy-light: #1a3560;
+    --accent: #00c8ff;
+    --accent2: #00ff9d;
+    --accent-red: #ff4444;
+    --accent-yellow: #ffd700;
+    --text: #e8f0fe;
+    --text-dim: #7a9cc4;
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Barlow', sans-serif;
+    --cond: 'Barlow Condensed', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* SCANLINE */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid rgba(0,200,255,0.2);
+    position: relative;
+  }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .header-tag::before { content: '// '; color: var(--text-dim); }
+
+  h1 {
+    font-family: var(--cond);
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  h1 .name-first { color: var(--text); }
+  h1 .name-last {
+    color: var(--accent);
+    -webkit-text-stroke: 1px var(--accent);
+  }
+
+  .header-sub {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.3s;
+  }
+
+  .header-sub span { color: var(--accent2); }
+
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+
+  .meta-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .meta-item::before {
+    content: '▶';
+    color: var(--accent);
+    font-size: 8px;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,255,157,0.1);
+    border: 1px solid rgba(0,255,157,0.3);
+    border-radius: 2px;
+    padding: 4px 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.5s;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s infinite;
+  }
+
+  /* NAV */
+  nav {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0,200,255,0.1);
+    position: sticky;
+    top: 0;
+    background: rgba(10,22,40,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .nav-inner {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  nav a:hover {
+    color: var(--accent);
+    border-color: rgba(0,200,255,0.3);
+    background: rgba(0,200,255,0.05);
+  }
+
+  /* SECTIONS */
+  section { padding: 64px 0; border-bottom: 1px solid rgba(0,200,255,0.08); }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-label::before { content: '[ '; }
+  .section-label::after { content: ' ]'; }
+
+  h2 {
+    font-family: var(--cond);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+
+  h2 em { color: var(--accent); font-style: normal; }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .about-text strong { color: var(--text); }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .stat-box {
+    background: var(--navy-mid);
+    border: 1px solid rgba(0,200,255,0.15);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+  }
+
+  .stat-num {
+    font-family: var(--cond);
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(0,200,255,0.12);
+    padding: 20px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+
+  .skill-card:hover { border-color: rgba(0,200,255,0.4); transform: translateY(-2px); }
+  .skill-card:hover::after { width: 100%; }
+
+  .skill-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .skill-name {
+    font-family: var(--cond);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .skill-items {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  /* CHAPTERS */
+  .chapters-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .chapter-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(0,200,255,0.12);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: start;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chapter-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+
+  .chapter-card:hover { border-color: rgba(0,200,255,0.35); }
+  .chapter-card:hover::before { opacity: 1; }
+
+  .chapter-card.highlight { border-color: rgba(0,200,255,0.4); }
+  .chapter-card.highlight::before { background: var(--accent2); opacity: 1; }
+
+  .chapter-num {
+    font-family: var(--cond);
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(0,200,255,0.15);
+    line-height: 1;
+    width: 60px;
+    text-align: center;
+  }
+
+  .chapter-card.highlight .chapter-num { color: rgba(0,255,157,0.3); }
+
+  .chapter-title {
+    font-family: var(--cond);
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .chapter-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .chapter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 8px;
+    border: 1px solid rgba(0,200,255,0.25);
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .tag.green { border-color: rgba(0,255,157,0.25); color: var(--accent2); }
+  .tag.red { border-color: rgba(255,68,68,0.25); color: var(--accent-red); }
+  .tag.yellow { border-color: rgba(255,215,0,0.25); color: var(--accent-yellow); }
+
+  .chapter-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .status-complete {
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .status-complete::before { content: '✓'; font-size: 12px; }
+
+  /* STIG RESULT BOX */
+  .result-box {
+    background: rgba(255,68,68,0.05);
+    border: 1px solid rgba(255,68,68,0.25);
+    padding: 20px 24px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) { .result-box { grid-template-columns: 1fr 1fr; } }
+
+  .result-item { text-align: center; }
+
+  .result-num {
+    font-family: var(--cond);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .result-num.red { color: var(--accent-red); }
+  .result-num.green { color: var(--accent2); }
+  .result-num.dim { color: var(--text-dim); }
+  .result-num.blue { color: var(--accent); }
+
+  .result-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* SCREENSHOT PLACEHOLDERS */
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .screenshot-placeholder {
+    background: rgba(0,200,255,0.03);
+    border: 1px dashed rgba(0,200,255,0.2);
+    padding: 20px;
+    text-align: center;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .screenshot-placeholder img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .placeholder-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+  }
+
+  .placeholder-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 28px 24px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--navy);
+  }
+
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .timeline-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .timeline-text strong { color: var(--text); }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .contact-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(0,200,255,0.12);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .contact-card:hover { border-color: rgba(0,200,255,0.4); }
+
+  .contact-icon { font-size: 20px; }
+
+  .contact-info {}
+  .contact-type {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  .contact-value {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  .footer-text span { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* TERMINAL BLOCK */
+  .terminal {
+    background: #0d1117;
+    border: 1px solid rgba(0,200,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+
+  .terminal-bar {
+    background: rgba(0,200,255,0.08);
+    padding: 8px 14px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,200,255,0.1);
+  }
+
+  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-dot.r { background: #ff5f57; }
+  .terminal-dot.y { background: #febc2e; }
+  .terminal-dot.g { background: #28c840; }
+
+  .terminal-body {
+    padding: 16px 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.8;
+    color: #8b9bb4;
+  }
+
+  .terminal-body .cmd { color: #00c8ff; }
+  .terminal-body .out { color: #8b9bb4; }
+  .terminal-body .success { color: #00ff9d; }
+  .terminal-body .warn { color: #ffd700; }
+  .terminal-body .prompt { color: #5a7a9a; }
+
+  /* CHAPTER 8 SPECIAL */
+  .new-badge {
+    background: var(--accent2);
+    color: var(--navy);
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="header-tag">Government IT Portfolio — Systems Administration</div>
+    <h1>
+      <span class="name-first">Amar</span><br>
+      <span class="name-last">Hawkins</span>
+    </h1>
+    <p class="header-sub">
+      Username: <span>ahawk013</span> &nbsp;|&nbsp;
+      Platform: <span>Windows Server 2022</span> &nbsp;|&nbsp;
+      Environment: <span>UTM on Apple Silicon</span>
+    </p>
+    <div class="header-meta">
+      <span class="meta-item">Active Directory / Domain Services</span>
+      <span class="meta-item">WSUS Patch Management</span>
+      <span class="meta-item">DISA STIG Compliance</span>
+      <span class="meta-item">PowerShell Automation</span>
+      <span class="meta-item">Group Policy Administration</span>
+    </div>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      PORTFOLIO ACTIVE — 8 CHAPTERS COMPLETE
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#chapters">Chapters</a>
+      <a href="#stig">STIG Results</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Profile</div>
+    <h2>About <em>This Lab</em></h2>
+    <div class="about-grid">
+      <div>
+        <p class="about-text">
+          This portfolio documents a <strong>hands-on Windows Server 2022 government sysadmin lab</strong> built from scratch to simulate real DoD and federal IT environments. Every chapter covers a skill set directly relevant to government and cleared contractor roles.
+        </p>
+        <br>
+        <p class="about-text">
+          The lab runs on <strong>Windows Server 2022 Standard Evaluation</strong> virtualized in UTM on Apple Silicon Mac, with a fully functional Active Directory domain (<strong>local.lab</strong>), domain controller (<strong>DC01</strong>), and enterprise services including DNS, DHCP, WSUS, and STIG compliance tooling.
+        </p>
+        <br>
+        <p class="about-text">
+          Each chapter produces a <strong>professional Word document</strong> with full technical documentation and screenshots — ready to share with hiring managers and cleared employers.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-num">8</div>
+          <div class="stat-label">Chapters Complete</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">282</div>
+          <div class="stat-label">STIG Rules Scanned</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">122</div>
+          <div class="stat-label">Findings Identified</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">46%</div>
+          <div class="stat-label">Baseline Compliance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Competencies</div>
+    <h2>Technical <em>Skills</em></h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🏛️</div>
+        <div class="skill-name">Active Directory</div>
+        <div class="skill-items">
+          AD DS Forest & Domain Setup<br>
+          OU Structure & Delegation<br>
+          User, Group & Computer Management<br>
+          Domain Join & Authentication<br>
+          Replication & Site Services
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📋</div>
+        <div class="skill-name">Group Policy</div>
+        <div class="skill-items">
+          GPO Creation & Linking<br>
+          Security Baseline Configuration<br>
+          STIG Controls via GPO<br>
+          Legal Banner Deployment<br>
+          Password & Lockout Policy<br>
+          WSUS Client Policy
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔒</div>
+        <div class="skill-name">STIG Compliance</div>
+        <div class="skill-items">
+          DISA STIG Viewer 3.7<br>
+          SCAP Compliance Checker 5.14.1<br>
+          Windows Server 2022 STIG V2R8<br>
+          Compliance Scanning & Reporting<br>
+          Finding Review & Remediation<br>
+          RMF / ATO Support
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📦</div>
+        <div class="skill-name">Patch Management</div>
+        <div class="skill-items">
+          WSUS Installation & Configuration<br>
+          Computer Group Management<br>
+          Approval Rules & Workflows<br>
+          GPO-Based Client Configuration<br>
+          DNS Forwarding & Troubleshooting<br>
+          IAVM Compliance Concepts
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">Network Services</div>
+        <div class="skill-items">
+          DNS Zone Management<br>
+          DHCP Scope & Reservations<br>
+          DNS Forwarding Configuration<br>
+          A, PTR, CNAME Records<br>
+          Network Troubleshooting
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">PowerShell</div>
+        <div class="skill-items">
+          AD Bulk User Management<br>
+          Scheduled Task Automation<br>
+          Event Log Querying<br>
+          Security Reporting Scripts<br>
+          Service & Feature Management<br>
+          DNS & DHCP Administration
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📁</div>
+        <div class="skill-name">File Services</div>
+        <div class="skill-items">
+          SMB Share Creation<br>
+          NTFS Permission Management<br>
+          Access Control Lists (ACLs)<br>
+          Department-Based Access<br>
+          Inheritance & Propagation
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Security Monitoring</div>
+        <div class="skill-items">
+          Windows Event Log Analysis<br>
+          Audit Policy Configuration<br>
+          Key Security Event IDs<br>
+          Failed Login Detection<br>
+          Account Lockout Investigation<br>
+          Log Export & Reporting
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<section id="chapters">
+  <div class="container">
+    <div class="section-label">Lab Documentation</div>
+    <h2>Chapter <em>Index</em></h2>
+
+    <div class="chapters-list">
+
+      <!-- CH1 -->
+      <div class="chapter-card reveal">
+        <div class="chapter-num">01</div>
+        <div>
+          <div class="chapter-title">Domain Controller Setup</div>
+          <div class="chapter-desc">Deployed Windows Server 2022, promoted a Domain Controller, and built an Active Directory forest with integrated DNS using PowerShell. Established the local.lab domain with DC01 as the primary domain controller.</div>
+          <div class="chapter-tags">
+            <span class="tag">AD DS</span>
+            <span class="tag">DNS</span>
+            <span class="tag">PowerShell</span>
+            <span class="tag">Forest Promotion</span>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+      <!-- CH2 -->
+      <div class="chapter-card reveal">
+        <div class="chapter-num">02</div>
+        <div>
+          <div class="chapter-title">Domain Join & AD Administration</div>
+          <div class="chapter-desc">Domain-joined workstations to local.lab, created Organizational Units (OUs) mirroring government department structure, managed users and security groups, and configured role-based access controls.</div>
+          <div class="chapter-tags">
+            <span class="tag">Domain Join</span>
+            <span class="tag">OU Design</span>
+            <span class="tag">User Management</span>
+            <span class="tag">Security Groups</span>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+      <!-- CH3 -->
+      <div class="chapter-card reveal">
+        <div class="chapter-num">03</div>
+        <div>
+          <div class="chapter-title">Group Policy & Security Baseline</div>
+          <div class="chapter-desc">Created and linked Group Policy Objects for security hardening including DoD-compliant legal banners, password complexity requirements, account lockout policies, USB device restrictions, and screen lock enforcement.</div>
+          <div class="chapter-tags">
+            <span class="tag">GPO</span>
+            <span class="tag">Security Baseline</span>
+            <span class="tag">Legal Banner</span>
+            <span class="tag">Password Policy</span>
+            <span class="tag">STIG Controls</span>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+      <!-- CH4 -->
+      <div class="chapter-card reveal">
+        <div class="chapter-num">04</div>
+        <div>
+          <div class="chapter-title">File Shares & NTFS Permissions</div>
+          <div class="chapter-desc">Created department-based SMB file shares with granular NTFS permissions. Configured access control lists for HR, Finance, and IT departments with appropriate read/write/deny permissions and inheritance settings.</div>
+          <div class="chapter-tags">
+            <span class="tag">SMB Shares</span>
+            <span class="tag">NTFS</span>
+            <span class="tag">ACLs</span>
+            <span class="tag">Access Control</span>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+      <!-- CH5 -->
+      <div class="chapter-card reveal">
+        <div class="chapter-num">05</div>
+        <div>
+          <div class="chapter-title">DNS & DHCP Administration</div>
+          <div class="chapter-desc">Managed DNS zones including forward and reverse lookup zones, created A, PTR, and CNAME records. Configured DHCP scopes, address reservations, and lease options for the domain network.</div>
+          <div class="chapter-tags">
+            <span class="tag">DNS</span>
+            <span class="tag">DHCP</span>
+            <span class="tag">Zone Management</span>
+            <span class="tag">Reservations</span>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+      <!-- CH6 -->
+      <div class="chapter-card reveal">
+        <div class="chapter-num">06</div>
+        <div>
+          <div class="chapter-title">PowerShell Automation</div>
+          <div class="chapter-desc">Built automation scripts for bulk AD user creation, scheduled security reporting tasks, automated log collection, and administrative workflows. Created reusable scripts for common government sysadmin tasks.</div>
+          <div class="chapter-tags">
+            <span class="tag">PowerShell</span>
+            <span class="tag">Automation</span>
+            <span class="tag">Scheduled Tasks</span>
+            <span class="tag">Bulk Operations</span>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+      <!-- CH7 -->
+      <div class="chapter-card reveal">
+        <div class="chapter-num">07</div>
+        <div>
+          <div class="chapter-title">Event Logs & Security Monitoring</div>
+          <div class="chapter-desc">Configured audit policy across all key categories, queried Windows Event Logs using PowerShell for critical security Event IDs (4625, 4648, 4662, 4769), exported logs for analysis, and built automated daily security summary reports.</div>
+          <div class="chapter-tags">
+            <span class="tag">Event Logs</span>
+            <span class="tag">Audit Policy</span>
+            <span class="tag">Security Monitoring</span>
+            <span class="tag">Event IDs</span>
+            <span class="tag">SIEM Prep</span>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+      <!-- CH8 - HIGHLIGHTED -->
+      <div class="chapter-card highlight reveal">
+        <div class="chapter-num">08</div>
+        <div>
+          <div class="chapter-title">WSUS & STIG Compliance Scanning <span class="new-badge">NEW</span></div>
+          <div class="chapter-desc">Installed and configured Windows Server Update Services (WSUS) with computer groups, staged approval rules, and GPO-based client policy. Installed DISA STIG Viewer 3.7 and SCAP Compliance Checker 5.14.1. Ran a full automated STIG compliance scan against DC01 using the Windows Server 2022 STIG (V2R8, April 2026), producing a formal non-compliance report with 122 findings across 282 controls.</div>
+
+          <div class="chapter-tags">
+            <span class="tag green">WSUS</span>
+            <span class="tag green">STIG Viewer 3.7</span>
+            <span class="tag green">SCAP / SCC 5.14.1</span>
+            <span class="tag green">Patch Management</span>
+            <span class="tag red">46.49% — RED</span>
+            <span class="tag yellow">282 Rules Scanned</span>
+          </div>
+
+          <div class="terminal" style="margin-top: 16px;">
+            <div class="terminal-bar">
+              <span class="terminal-dot r"></span>
+              <span class="terminal-dot y"></span>
+              <span class="terminal-dot g"></span>
+              <span style="font-family: var(--mono); font-size: 10px; color: var(--text-dim); margin-left: 8px;">SCC 5.14.1 — DC01 Scan Output</span>
+            </div>
+            <div class="terminal-body">
+              <span class="prompt">21:48:12</span> <span class="cmd">Generating report...</span> <span class="out">Non-Compliance_MS_Windows_Server_2022_STIG-002.008.018.html</span><br>
+              <span class="prompt">21:48:44</span> <span class="out">Saved results from 282 of 282 XCCDF rules</span><br>
+              <span class="prompt">21:49:08</span> <span class="warn">Adjusted Score - 46.49% [RED]</span><br>
+              <span class="prompt">21:49:08</span> <span class="warn">Original Score  - 46.49% [RED]</span><br>
+              <span class="prompt">21:49:08</span> <span class="out">Duration: 00:18:54 &nbsp;|&nbsp; Host: DC01 &nbsp;|&nbsp; Domain: local.lab</span><br>
+              <span class="prompt">21:49:25</span> <span class="success">SCC Scan and Report Creation Complete</span>
+            </div>
+          </div>
+        </div>
+        <div class="chapter-status">
+          <span class="status-complete">Complete</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STIG RESULTS -->
+<section id="stig">
+  <div class="container">
+    <div class="section-label">Compliance Data</div>
+    <h2>STIG Scan <em>Results</em></h2>
+    <p style="color: var(--text-dim); font-size: 14px; margin-bottom: 24px; line-height: 1.7;">
+      SCAP Compliance Checker 5.14.1 was run against DC01 using the Microsoft Windows Server 2022 STIG — Version 2, Release 8 (Benchmark Date: 01 April 2026). The scan covers 282 security controls and completed in 18 minutes 54 seconds. A 46% baseline score on an unhardened server is normal — remediation is covered in Chapter 9.
+    </p>
+
+    <div class="result-box reveal">
+      <div class="result-item">
+        <div class="result-num red">46.49%</div>
+        <div class="result-label">Compliance Score</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num green">106</div>
+        <div class="result-label">Controls Passed</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num red">122</div>
+        <div class="result-label">Controls Failed</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num blue">282</div>
+        <div class="result-label">Total Rules</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <h3 style="font-family: var(--cond); font-size: 18px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; letter-spacing: 1px;">Key Failed Controls (Sample)</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 100px 1fr 80px; gap: 12px; padding: 10px 14px; background: var(--navy-mid); border: 1px solid rgba(255,68,68,0.15); font-family: var(--mono); font-size: 11px;">
+          <span style="color: var(--accent);">V-254447</span>
+          <span style="color: var(--text-dim);">Built-in Administrator account must be renamed</span>
+          <span style="color: var(--accent-red); text-align: right;">FAIL</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 100px 1fr 80px; gap: 12px; padding: 10px 14px; background: var(--navy-mid); border: 1px solid rgba(255,68,68,0.15); font-family: var(--mono); font-size: 11px;">
+          <span style="color: var(--accent);">V-254457</span>
+          <span style="color: var(--text-dim);">Legal notice must be configured before logon</span>
+          <span style="color: var(--accent-red); text-align: right;">FAIL</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 100px 1fr 80px; gap: 12px; padding: 10px 14px; background: var(--navy-mid); border: 1px solid rgba(255,68,68,0.15); font-family: var(--mono); font-size: 11px;">
+          <span style="color: var(--accent);">V-254377</span>
+          <span style="color: var(--text-dim);">PowerShell script block logging must be enabled</span>
+          <span style="color: var(--accent-red); text-align: right;">FAIL</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 100px 1fr 80px; gap: 12px; padding: 10px 14px; background: var(--navy-mid); border: 1px solid rgba(255,68,68,0.15); font-family: var(--mono); font-size: 11px;">
+          <span style="color: var(--accent);">V-254379</span>
+          <span style="color: var(--text-dim);">WinRM client must not allow unencrypted traffic</span>
+          <span style="color: var(--accent-red); text-align: right;">FAIL</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 100px 1fr 80px; gap: 12px; padding: 10px 14px; background: var(--navy-mid); border: 1px solid rgba(255,68,68,0.15); font-family: var(--mono); font-size: 11px;">
+          <span style="color: var(--accent);">V-254416</span>
+          <span style="color: var(--text-dim);">Domain controllers must require LDAP access signing</span>
+          <span style="color: var(--accent-red); text-align: right;">FAIL</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 100px 1fr 80px; gap: 12px; padding: 10px 14px; background: var(--navy-mid); border: 1px solid rgba(255,68,68,0.15); font-family: var(--mono); font-size: 11px;">
+          <span style="color: var(--accent);">V-254415</span>
+          <span style="color: var(--text-dim);">Users must require CAC/PIV for authentication</span>
+          <span style="color: var(--accent-red); text-align: right;">FAIL</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <h3 style="font-family: var(--cond); font-size: 18px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; letter-spacing: 1px;">Chapter 8 Screenshots</h3>
+      <p style="font-family: var(--mono); font-size: 10px; color: var(--text-dim); margin-bottom: 16px;">
+        // To display screenshots: upload images to your GitHub repo in a folder named <span style="color: var(--accent);">ch8-screenshots/</span> with the filenames below. They will appear automatically.
+      </p>
+      <div class="screenshots-grid">
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/01_WSUS_install_success.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 01</span>
+          <span class="placeholder-label">01_WSUS_install_success.png<br>WSUS Installation Success</span>
+        </div>
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/03_WSUS_console_dashboard.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 03</span>
+          <span class="placeholder-label">03_WSUS_console_dashboard.png<br>WSUS Console Dashboard</span>
+        </div>
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/05_WSUS_computer_groups.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 05</span>
+          <span class="placeholder-label">05_WSUS_computer_groups.png<br>Computer Groups Created</span>
+        </div>
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/08_WSUS_GPO_intranet_update_server.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 08</span>
+          <span class="placeholder-label">08_WSUS_GPO_intranet_update_server.png<br>GPO WSUS Client Policy</span>
+        </div>
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/16_STIG_Viewer_WS2022_loaded.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 16</span>
+          <span class="placeholder-label">16_STIG_Viewer_WS2022_loaded.png<br>STIG Viewer — 282 Rules Loaded</span>
+        </div>
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/21_SCC_scan_complete.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 21</span>
+          <span class="placeholder-label">21_SCC_scan_complete.png<br>SCC Scan Complete — 46.49% RED</span>
+        </div>
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/23_SCC_noncompliance_report.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 23</span>
+          <span class="placeholder-label">23_SCC_noncompliance_report.png<br>Non-Compliance Report</span>
+        </div>
+        <div class="screenshot-placeholder">
+          <img src="ch8-screenshots/24_SCC_failed_findings.png" onerror="this.style.display='none'" alt="">
+          <span class="placeholder-num">Screenshot 24</span>
+          <span class="placeholder-label">24_SCC_failed_findings.png<br>Failed STIG Findings List</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Connect</div>
+    <h2>Get In <em>Touch</em></h2>
+    <div class="contact-grid">
+      <a class="contact-card" href="https://ahawk013.github.io" target="_blank">
+        <span class="contact-icon">🌐</span>
+        <div class="contact-info">
+          <div class="contact-type">PORTFOLIO</div>
+          <div class="contact-value">ahawk013.github.io</div>
+        </div>
+      </a>
+      <div class="contact-card">
+        <span class="contact-icon">🔐</span>
+        <div class="contact-info">
+          <div class="contact-type">CLEARANCEJOBS</div>
+          <div class="contact-value">ahawk013</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">💻</span>
+        <div class="contact-info">
+          <div class="contact-type">GITHUB</div>
+          <div class="contact-value">github.com/ahawk013</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p class="footer-text">
+      <span>ahawk013</span> — Government Sysadmin Lab Portfolio — Windows Server 2022 — local.lab<br>
+      Built with hands-on lab work. Updated continuously.
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
